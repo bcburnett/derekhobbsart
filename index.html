@@ -1,0 +1,119 @@
+<!--
+@license
+Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My app</title>
+    <meta name="generator" content="PWA Starter Kit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="My App description">
+
+    <!--
+      The `<base>` tag below is present to support two advanced deployment options:
+      1) Differential serving. 2) Serving from a non-root path.
+
+      Instead of manually editing the `<base>` tag yourself, you should generally either:
+      a) Add a `basePath` property to the build configuration in your `polymer.json`.
+      b) Use the `--base-path` command-line option for `polymer build`.
+    -->
+    <base href="/">
+
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="My App">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="My App">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#3f51b5">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Default twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@username">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="my-app">
+    <meta property="og:image" content="images/manifest/icon-144x144.png" />
+
+    <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <script>
+      // Load and register pre-caching Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js', {
+            scope: '/',
+          });
+        });
+      }
+
+      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+      // https://github.com/reactjs/redux/issues/2907
+      window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+  <script>!function (e) { if ("object" == typeof exports && "undefined" != typeof module) module.exports = e(); else if ("function" == typeof define && define.amd) define([], e); else { ("undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this).uuidv1 = e() } }(function () { return function () { return function e(n, r, o) { function t(u, f) { if (!r[u]) { if (!n[u]) { var c = "function" == typeof require && require; if (!f && c) return c(u, !0); if (i) return i(u, !0); var s = new Error("Cannot find module '" + u + "'"); throw s.code = "MODULE_NOT_FOUND", s } var a = r[u] = { exports: {} }; n[u][0].call(a.exports, function (e) { return t(n[u][1][e] || e) }, a, a.exports, e, n, r, o) } return r[u].exports } for (var i = "function" == typeof require && require, u = 0; u < o.length; u++)t(o[u]); return t } }()({ 1: [function (e, n, r) { for (var o = [], t = 0; t < 256; ++t)o[t] = (t + 256).toString(16).substr(1); n.exports = function (e, n) { var r = n || 0, t = o; return [t[e[r++]], t[e[r++]], t[e[r++]], t[e[r++]], "-", t[e[r++]], t[e[r++]], "-", t[e[r++]], t[e[r++]], "-", t[e[r++]], t[e[r++]], "-", t[e[r++]], t[e[r++]], t[e[r++]], t[e[r++]], t[e[r++]], t[e[r++]]].join("") } }, {}], 2: [function (e, n, r) { var o = "undefined" != typeof crypto && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || "undefined" != typeof msCrypto && "function" == typeof window.msCrypto.getRandomValues && msCrypto.getRandomValues.bind(msCrypto); if (o) { var t = new Uint8Array(16); n.exports = function () { return o(t), t } } else { var i = new Array(16); n.exports = function () { for (var e, n = 0; n < 16; n++)0 == (3 & n) && (e = 4294967296 * Math.random()), i[n] = e >>> ((3 & n) << 3) & 255; return i } } }, {}], 3: [function (e, n, r) { var o, t, i = e("./lib/rng"), u = e("./lib/bytesToUuid"), f = 0, c = 0; n.exports = function (e, n, r) { var s = n && r || 0, a = n || [], d = (e = e || {}).node || o, l = void 0 !== e.clockseq ? e.clockseq : t; if (null == d || null == l) { var p = i(); null == d && (d = o = [1 | p[0], p[1], p[2], p[3], p[4], p[5]]), null == l && (l = t = 16383 & (p[6] << 8 | p[7])) } var v = void 0 !== e.msecs ? e.msecs : (new Date).getTime(), y = void 0 !== e.nsecs ? e.nsecs : c + 1, m = v - f + (y - c) / 1e4; if (m < 0 && void 0 === e.clockseq && (l = l + 1 & 16383), (m < 0 || v > f) && void 0 === e.nsecs && (y = 0), y >= 1e4) throw new Error("uuid.v1(): Can't create more than 10M uuids/sec"); f = v, c = y, t = l; var w = (1e4 * (268435455 & (v += 122192928e5)) + y) % 4294967296; a[s++] = w >>> 24 & 255, a[s++] = w >>> 16 & 255, a[s++] = w >>> 8 & 255, a[s++] = 255 & w; var b = v / 4294967296 * 1e4 & 268435455; a[s++] = b >>> 8 & 255, a[s++] = 255 & b, a[s++] = b >>> 24 & 15 | 16, a[s++] = b >>> 16 & 255, a[s++] = l >>> 8 | 128, a[s++] = 255 & l; for (var x = 0; x < 6; ++x)a[s + x] = d[x]; return n || u(a) } }, { "./lib/bytesToUuid": 1, "./lib/rng": 2 }] }, {}, [3])(3) });</script>
+    <!-- Add any global styles for body, document, etc. -->
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'Great Vibes';
+        font-style: normal;
+        font-weight: 400;
+         
+        src: local('Great Vibes'), local('Great Vibes'), url("https://fonts.googleapis.com/css?family=Great+Vibes");
+        /* The browser draws the text immediately in the fallback font if the font
+           isn't loaded, then swaps it with the webfont when it eventually loads
+           See: https://developers.google.com/web/updates/2016/02/font-display
+        */
+        font-family: 'Great Vibes', cursive;
+        font-display: swap;
+      }
+      body {
+        margin: 0;
+        /* This is a font-stack that tries to use the system-default sans-serifs first */
+        font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        line-height: 1.5;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+  <body>
+    <my-app appTitle="Derek Hobbs Art"></my-app>
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
+    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <!-- Built with love using PWA Starter Kit -->
+    <script type="module" src="src/components/my-app.js"></script>
+  </body>
+</html>
