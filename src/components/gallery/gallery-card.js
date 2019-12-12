@@ -20,12 +20,18 @@ export class GalleryCard extends connect(store) (LitElement) {
     return css`
     
     .card{
-          display: inline-block;
-          margin: 0;
-          width: 100%;
-          padding-bottom: 20px;
-          text-align: center;
-      }
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: auto;
+        text-align: center;
+        width:90%;
+        padding:15px;
+        margin-bottom:1vh;
+        transition: all 500ms cubic-bezier(0.395, 0.060, 0.425, 1.195);
+        cursor: pointer;
+        background-size: 90% ;
+        justify-content: center;
+        align-items: center;
+
       .card:active{
         cursor: grabbing;
       }
@@ -37,28 +43,21 @@ export class GalleryCard extends connect(store) (LitElement) {
         margin:auto;
       }
       h1{
-        position: relative;
         top: -1rem;
         font-size:1.5rem;
         background-color: tan;
         margin:auto;
-        width: 90%;
+        margin-top:-10px;
+        max-width: 400px;
       }
       img {
-        width:90%;
+        width: 300px;
         margin-bottom:0;
         padding-bottom:0;
       }
-      @media (max-width: 800px) {
-        h1{
-          font-size:1rem;
-      }
-    }
-      @media (max-width: 1300px) {
-        h1{
-          font-size:1.5rem;
-        }
-      }
+
+    }  
+      
     `;
   }
 
@@ -80,7 +79,7 @@ export class GalleryCard extends connect(store) (LitElement) {
 
   showModal(s){
     store.dispatch(currentCard(s));
-    store.dispatch(displayModal('true'));
+    store.dispatch(displayModal(true));
   }
 
 }

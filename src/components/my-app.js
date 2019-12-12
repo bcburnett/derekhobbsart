@@ -29,8 +29,9 @@ import {
 // These are the elements needed by this element.
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-header/app-header.js';
-import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
+import '@polymer/app-layout/app-scroll-effects/effects/parallax-background';
+import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import { menuIcon } from './my-icons.js';
 import './snack-bar.js';
 
@@ -78,7 +79,6 @@ class MyApp extends connect(store)(LitElement) {
           background-color: var(--app-header-background-color);
           color: var(--app-header-text-color);
           border-bottom: 1px solid #eee;
-          z-index:10;
         }
 
         .toolbar-top {
@@ -115,6 +115,7 @@ class MyApp extends connect(store)(LitElement) {
           text-decoration: none;
           line-height: 30px;
           padding: 4px 24px;
+          z-index:2;
         }
 
         .toolbar-list > a[selected] {
@@ -146,6 +147,7 @@ class MyApp extends connect(store)(LitElement) {
           color: var(--app-drawer-text-color);
           line-height: 40px;
           padding: 0 24px;
+          z-index:200;
         }
 
         .drawer-list > a[selected] {
@@ -222,7 +224,7 @@ class MyApp extends connect(store)(LitElement) {
     // Anything that's related to rendering should be done in here.
     return html`
       <!-- Header -->
-      <app-header condenses reveals effects="waterfall">
+      <app-header reveals effects="waterfall parallax-background">
         <app-toolbar class="toolbar-top">
           <button class="menu-btn" title="Menu" @click="${this._menuButtonClicked}">${menuIcon}</button>
           <img src="images/dh.jpg" width="50" style="border-radius:50%;" />
@@ -232,13 +234,11 @@ class MyApp extends connect(store)(LitElement) {
             Visual Artist | Madison, WI
           </h6>
         </app-toolbar>
-
-        <!-- This gets hidden on a small screen-->
         <nav class="toolbar-list">
           <a ?selected="${this._page === 'gallery'}" href="/gallery">Gallery</a>
-          <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
+          <a ?selected="${this._page === 'view2'}" href="/view2">About</a>
           <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
-        </nav>
+  </nav>
       </app-header>
 
       <!-- Drawer content -->
@@ -247,7 +247,7 @@ class MyApp extends connect(store)(LitElement) {
           @opened-changed="${this._drawerOpenedChanged}">
         <nav class="drawer-list">
           <a ?selected="${this._page === 'gallery'}" href="/gallery">Gallery</a>
-          <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
+          <a ?selected="${this._page === 'view2'}" href="/view2">About</a>
           <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
         </nav>
       </app-drawer>
@@ -261,7 +261,7 @@ class MyApp extends connect(store)(LitElement) {
       </main>
 
       <footer>
-        <p>Made with &hearts; by the Polymer team.</p>
+        <p>&copy; ${new Date().getFullYear()} Derek Hobbs Art.</p>
       </footer>
 
       <snack-bar ?active="${this._snackbarOpened}">

@@ -8,11 +8,6 @@ import { store } from '../../store.js';
 export class GalleryModal extends ReduxClass {
   static get properties() {
     return {
-      obj: {
-        type: Object,
-        reflect: true,
-        attribute: true
-      },
       title: String,
       image: String,
       html: Object,
@@ -106,23 +101,6 @@ img{
     `
   }
 
-  showCard(card) {
-    if (!card || Object.entries(card).length === 0) return;
-    this.title = card.text;
-    this.image = card.background;
-    this.html = html(card.link.strings, ...card.link.values);
-    this.etsy = card.etsy;
-    this.instagram = card.instagram;
-  }
-
-  show() {
-    this.modal.style.display = "block";
-  }
-
-  hide() {
-    this.modal.style.display = 'none'
-  }
-
   back() {
     const len = (this.artData[this.gallery].length - 1)
     const index = (this.card.i == 0) ? len : this.card.i - 1
@@ -148,7 +126,7 @@ img{
   
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close" id="close" @click="${() => store.dispatch(displayModal('false'))}">&times;</span>
+      <span class="close" id="close" @click="${() => store.dispatch(displayModal(false))}">&times;</span>
       <br>
   <div class="myModal">
         <button @click="${() => this.back()}" class="back">&lt; Previous</button>
@@ -160,11 +138,11 @@ img{
         ${this.html} 
         <br />
           <a href="${this.etsy}"
-          target="blank"
+          target="_blank"
           style="margin-bottom:20px;">${this.etsy ? 'View at Etsy' : ''}</a>
         <br>
           <a href="${this.instagram}"
-            target="blank"
+            target="_blank"
             style="margin-bottom:20px;">${this.instagram ? 'View at Instagram' : ''}</a>
           <br>
             ${this.etsy || this.instagram ? 'Opens in new page.' : ''}
@@ -185,24 +163,17 @@ img{
     console.log(app);
     if (this.artData !== app.artData) this.artData = app.artData;
     if (this.gallery !== app.gallery) this.gallery = app.gallery;
-    if (this.card !== app.card) {
+    if (Object.entries(app.card).length !== 0) {
       this.card = app.card;
-      this.showCard(this.card);
+      const card = this.card;
+      this.title = card.text;
+      this.image = card.background;
+      this.html = html(card.link.strings, ...card.link.values);
+      this.etsy = card.etsy;
+      this.instagram = card.instagram;
+      app.showModal? this.modal.style.display = "block": this.modal.style.display = 'none';
     }
-    if (!app.card || Object.entries(app.card).length === 0) return;
-
-    if (this.showModal !== app.showModal) {
-      this.showModal = app.showModal;
-      if (app.showModal === 'true') {
-        this.showCard(app.card);
-        this.show()
-        return
-      }
-      if (app.showModal === 'false') this.hide();
-    }
-
   }
-
 }
 
 customElements.define('gallery-modal', GalleryModal)

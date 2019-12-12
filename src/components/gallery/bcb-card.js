@@ -60,12 +60,8 @@ export class BcbCard extends connect(store)(LitElement) {
             margin: auto;
             margin-bottom:0;
         }
-        @media(max-width: 600px){
-                h1 {
-                    font-size: .25rem;
-                }
-        }
-        @media(max-width: 800px){
+
+        @media(max-width: 500px){
         h1 {
             font-size: 1 rem;
             margin-top:0;
@@ -78,11 +74,7 @@ export class BcbCard extends connect(store)(LitElement) {
             align-items: center;
         }
         }
-        @media(max-width: 1300px){
-            h1 {
-                font-size: 1.5rem;
-            }
-        }
+
             `;
   }
 
@@ -98,7 +90,7 @@ export class BcbCard extends connect(store)(LitElement) {
             id=${"id"+ i}
             @click = "${()=>loadGallery(i,s)}">
             <img src="${s.background}" />
-            <h1 > ${s.text} </h1>
+            <h4 > ${s.text} </h4>
             </div>` : html`<div > </div>`)} 
             </div> `;
   }
